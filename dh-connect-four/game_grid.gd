@@ -1,15 +1,18 @@
 extends Resource
 class_name GameGrid
 
-const RED = "#ad1313"
-const YELLOW = "#989532"
+const RED = "#EF476F"
+const YELLOW = "#F6D776"
 const EMPTY = ""
+
+const RED_3 = [RED, RED, RED]
+const YELLOW_3 = [YELLOW, YELLOW, YELLOW]
 
 const RED_WIN = [RED, RED, RED, RED]
 const YELLOW_WIN = [YELLOW, YELLOW, YELLOW, YELLOW]
 
 @export var grid: Array
-@export var jogador: String
+@export var player: String
 
 func _init():
 	self.grid = []
@@ -21,17 +24,98 @@ func _init():
 		row.fill(EMPTY)
 		self.grid.append(row)
 
-	self.jogador = RED
+	self.player = RED
 
 func switch_player() -> void:
-	self.jogador = RED if self.jogador == YELLOW else YELLOW
+	self.player = RED if self.player == YELLOW else YELLOW
 
 func empate() -> bool:
-	for linha in self.grid:
-		for coluna in linha:
-			if coluna == EMPTY:
-				return false
+	for column in self.grid[0]:
+		if column == EMPTY:
+			return false
 	return true
+
+
+#func evaluate() -> float:
+	#var score := 0.0
+#
+	## Center column preference
+	#for row in range(6):
+		#if grid[row][3] == RED:
+			#score += 6
+		#elif grid[row][3] == YELLOW:
+			#score -= 6
+#
+	## Horizontal
+	#for row in range(6):
+		#for col in range(4):
+			#score += evaluate_window([
+				#grid[row][col],
+				#grid[row][col + 1],
+				#grid[row][col + 2],
+				#grid[row][col + 3],
+			#])
+#
+	## Vertical
+	#for row in range(3):
+		#for col in range(7):
+			#score += evaluate_window([
+				#grid[row][col],
+				#grid[row + 1][col],
+				#grid[row + 2][col],
+				#grid[row + 3][col],
+			#])
+#
+	## Diagonal \
+	#for row in range(3):
+		#for col in range(4):
+			#score += evaluate_window([
+				#grid[row][col],
+				#grid[row + 1][col + 1],
+				#grid[row + 2][col + 2],
+				#grid[row + 3][col + 3],
+			#])
+#
+	## Diagonal /
+	#for row in range(3, 6):
+		#for col in range(4):
+			#score += evaluate_window([
+				#grid[row][col],
+				#grid[row - 1][col + 1],
+				#grid[row - 2][col + 2],
+				#grid[row - 3][col + 3],
+			#])
+#
+	#return score
+#
+#func evaluate_window(window: Array) -> float:
+	#var red_count := window.count(RED)
+	#var yellow_count := window.count(YELLOW)
+	#var empty_count := window.count(EMPTY)
+#
+	## RED wins
+	#if red_count == 4:
+		#return 100000
+#
+	## YELLOW wins
+	#if yellow_count == 4:
+		#return -100000
+#
+	## RED threats
+	#if red_count == 3 and empty_count == 1:
+		#return 100
+#
+	#if red_count == 2 and empty_count == 2:
+		#return 10
+#
+	## YELLOW threats
+	#if yellow_count == 3 and empty_count == 1:
+		#return -100
+#
+	#if yellow_count == 2 and empty_count == 2:
+		#return -10
+#
+	#return 0
 
 func evaluate() -> float:
 	var eval: float = 0.5
@@ -46,13 +130,14 @@ func evaluate() -> float:
 		| 5, 0 | 5, 1 | 5, 2 | 5, 3 | 5, 4 | 5, 5 | 5, 6 |
 	]
 	"""
+	# Check draw
 	
 	# Check rows
 	for i in range(4):	
 		for row in self.grid:
 			if row.slice(i, i+4) in [RED_WIN, YELLOW_WIN]:
-				print("horizontal win")
-				eval = 1
+				#print("horizontal win")
+				return 100000
 
 	# Check cols
 	for i in range(6):
@@ -72,8 +157,8 @@ func evaluate() -> float:
 			self.grid[4][i],
 			self.grid[5][i],
 		] in [RED_WIN, YELLOW_WIN]:
-			print("vertical win")
-			eval = 1
+			#print("vertical win")
+			return 100000
 
 	# Check diagonals
 	for i in range(3):
@@ -89,48 +174,32 @@ func evaluate() -> float:
 				self.grid[i+2][j-2],
 				self.grid[i+3][j-3],
 			] in [RED_WIN, YELLOW_WIN]:
-				print("diagonal win")
-				eval = 1
-		
+				#print("diagonal win")
+				return 100000
 
-	##print("Avaliando o tabuleiro: ", self.grid)
-	#for i in range(3):
-		## (i,0) == (i,1) == (i,2) != EMPTY
-		#if self.grid[i][0] == self.grid[i][1] and self.grid[i][1] == self.grid[i][2] and self.grid[i][2] != EMPTY:
-			#eval = 1 if self.grid[i][0] == self.jogador else -1
-			##print("Fim Jogo na linha: ", i, " o resultado foi: ", eval)
-		#if self.grid[0][i] == self.grid[1][i] and self.grid[1][i] == self.grid[2][i] and self.grid[2][i] != EMPTY:
-			#eval = 1 if self.grid[0][i] == self.jogador else -1
-			##print("Fim Jogo na coluna: ", i, " o resultado foi: ", eval)
-			#
-	#if self.grid[0][0] == self.grid[1][1] and self.grid[1][1] == self.grid[2][2] and self.grid[2][2] != EMPTY:
-		#eval = 1 if self.grid[0][0] == self.jogador else -1
-		##print("Fim Jogo na diagonal principal o resultado foi: ", eval)
-	#if self.grid[2][0] == self.grid[1][1] and self.grid[1][1] == self.grid[0][2] and self.grid[0][2] != EMPTY:
-		#eval = 1 if self.grid[2][0] == self.jogador else -1
-		##print("Fim Jogo na diagonal secundaria o resultado foi: ", eval)
-	
-	#if eval == 0.5:
-		#print("Jogo empatado ou incompleto")
-	return eval 
+	return eval
 
-func jogador_atual() -> String:
-	return jogador
+func current_player() -> String:
+	return player
 
 func jogadas_possiveis() -> Array:
 	var jogadas: Array = []
-	for linha in range(3):
-		for coluna in range(3):
-			if self.grid[linha][coluna] == EMPTY:
-				jogadas.append(Vector2(linha, coluna))
+
+	for col in range(7):
+		for row in range(5, -1, -1):
+			if grid[row][col] == EMPTY:
+				jogadas.append(Vector2(row, col))
+				break
+
 	return jogadas
 	
-func movimentar(movimento: Vector2, jogador: String) -> GameGrid:
+func movimentar(movimento: Vector2, player: String) -> GameGrid:
 	var lin = movimento.x
 	var col = movimento.y
-	
+
 	var novo_tabuleiro = self.duplicate(true)
-	novo_tabuleiro.tabuleiro[lin][col] = jogador
+	novo_tabuleiro.grid[lin][col] = player
+
 	return novo_tabuleiro
 
 func valida_jogada(casa: Vector2) -> bool:
@@ -141,6 +210,6 @@ func valida_jogada(casa: Vector2) -> bool:
 		
 func jogada(casa: Vector2) -> bool:
 	if valida_jogada(casa):
-		grid[casa.x][casa.y] = jogador
+		grid[casa.x][casa.y] = player
 		return true
 	return false

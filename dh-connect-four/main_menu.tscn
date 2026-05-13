@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://pjr166bk5xxk"]
+
+[ext_resource type="FontFile" uid="uid://cgd3m3rqin1to" path="res://fonts/PathwayGothicOne-Regular.ttf" id="1_06t4h"]
+
+[node name="MainMenu" type="Control" unique_id=1417782483]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1494811873]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02745098, 0.05490196, 0.7058824, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=575718699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=292996894]
+layout_mode = 2
+
+[node name="MainMessage" type="Label" parent="CenterContainer/VBoxContainer" unique_id=92936838]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 160
+text = "Connect 4"
+
+[node name="Actions" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1241136055]
+layout_mode = 2
+
+[node name="NewGame" type="Button" parent="CenterContainer/VBoxContainer/Actions" unique_id=1642916388]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 78
+text = "New Game"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer/Actions" unique_id=561307958]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 78
+text = "Quit"

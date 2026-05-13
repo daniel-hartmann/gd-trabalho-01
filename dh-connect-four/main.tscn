@@ -1,48 +1,6 @@
 [gd_scene format=3 uid="uid://blqpdglron6af"]
 
 [ext_resource type="Script" uid="uid://dbmlmelj7x37h" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://dqw804ntt5vlm" path="res://art/board.png" id="2_0xm2m"]
 
-[node name="Main" type="Node2D" unique_id=52604432]
+[node name="Main" type="Node" unique_id=485200629]
 script = ExtResource("1_ig7tw")
-
-[node name="ButtonContainer" type="GridContainer" parent="." unique_id=749098862]
-custom_minimum_size = Vector2(910, 780)
-offset_left = 103.0
-offset_top = 88.0
-offset_right = 1037.0
-offset_bottom = 868.0
-columns = 7
-
-[node name="ColumnButton0" type="Button" parent="ButtonContainer" unique_id=1414776811]
-custom_minimum_size = Vector2(130, 780)
-layout_mode = 2
-
-[node name="ColumnButton1" type="Button" parent="ButtonContainer" unique_id=1629531782]
-custom_minimum_size = Vector2(130, 780)
-layout_mode = 2
-
-[node name="ColumnButton2" type="Button" parent="ButtonContainer" unique_id=1130777185]
-custom_minimum_size = Vector2(130, 780)
-layout_mode = 2
-
-[node name="ColumnButton3" type="Button" parent="ButtonContainer" unique_id=559863568]
-custom_minimum_size = Vector2(130, 780)
-layout_mode = 2
-
-[node name="ColumnButton4" type="Button" parent="ButtonContainer" unique_id=1278280264]
-custom_minimum_size = Vector2(130, 780)
-layout_mode = 2
-
-[node name="ColumnButton5" type="Button" parent="ButtonContainer" unique_id=794538150]
-custom_minimum_size = Vector2(130, 780)
-layout_mode = 2
-
-[node name="ColumnButton6" type="Button" parent="ButtonContainer" unique_id=1303972656]
-custom_minimum_size = Vector2(130, 780)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=817860371]
-position = Vector2(570, 476.5)
-scale = Vector2(1.0263736, 1.0038462)
-texture = ExtResource("2_0xm2m")

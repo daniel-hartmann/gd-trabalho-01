@@ -1,0 +1,224 @@
+[gd_scene format=3 uid="uid://dn557ttm3o3lc"]
+
+[ext_resource type="Script" uid="uid://c1qctpxkwse1o" path="res://game.gd" id="1_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://6f7nixx57kde" path="res://art/column.png" id="2_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://dqw804ntt5vlm" path="res://art/board.png" id="2_feb5d"]
+[ext_resource type="Texture2D" uid="uid://b1j25a021i2mf" path="res://art/menu-icon.png" id="3_feb5d"]
+[ext_resource type="FontFile" uid="uid://cgd3m3rqin1to" path="res://fonts/PathwayGothicOne-Regular.ttf" id="5_7jktm"]
+
+[sub_resource type="Theme" id="Theme_feb5d"]
+
+[node name="Game" type="Node2D" unique_id=1131128064]
+script = ExtResource("1_e2o6t")
+
+[node name="Background" type="ColorRect" parent="." unique_id=147808367]
+custom_minimum_size = Vector2(1280, 1280)
+offset_right = 1280.0
+offset_bottom = 1024.0
+color = Color(0.9295974, 0.95279354, 0.90761125, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=523542618]
+custom_minimum_size = Vector2(1280, 1280)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer" unique_id=405003996]
+layout_mode = 2
+
+[node name="ButtonContainer" type="GridContainer" parent="CenterContainer/CenterContainer" unique_id=1423239218]
+layout_mode = 2
+columns = 7
+
+[node name="ColumnButton0" type="Button" parent="CenterContainer/CenterContainer/ButtonContainer" unique_id=806421280]
+custom_minimum_size = Vector2(140, 840)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+icon = ExtResource("2_fc0e3")
+flat = true
+icon_alignment = 1
+
+[node name="ColumnButton1" type="Button" parent="CenterContainer/CenterContainer/ButtonContainer" unique_id=1097318243]
+custom_minimum_size = Vector2(140, 840)
+layout_mode = 2
+theme = SubResource("Theme_feb5d")
+theme_type_variation = &"FlatButton"
+icon = ExtResource("2_fc0e3")
+flat = true
+
+[node name="ColumnButton2" type="Button" parent="CenterContainer/CenterContainer/ButtonContainer" unique_id=2146387187]
+custom_minimum_size = Vector2(140, 840)
+layout_mode = 2
+theme = SubResource("Theme_feb5d")
+theme_type_variation = &"FlatButton"
+icon = ExtResource("2_fc0e3")
+flat = true
+
+[node name="ColumnButton3" type="Button" parent="CenterContainer/CenterContainer/ButtonContainer" unique_id=1897725022]
+custom_minimum_size = Vector2(140, 840)
+layout_mode = 2
+theme = SubResource("Theme_feb5d")
+theme_type_variation = &"FlatButton"
+icon = ExtResource("2_fc0e3")
+flat = true
+
+[node name="ColumnButton4" type="Button" parent="CenterContainer/CenterContainer/ButtonContainer" unique_id=1513445548]
+custom_minimum_size = Vector2(140, 840)
+layout_mode = 2
+theme = SubResource("Theme_feb5d")
+theme_type_variation = &"FlatButton"
+icon = ExtResource("2_fc0e3")
+flat = true
+
+[node name="ColumnButton5" type="Button" parent="CenterContainer/CenterContainer/ButtonContainer" unique_id=405492905]
+custom_minimum_size = Vector2(140, 840)
+layout_mode = 2
+theme = SubResource("Theme_feb5d")
+theme_type_variation = &"FlatButton"
+icon = ExtResource("2_fc0e3")
+flat = true
+
+[node name="ColumnButton6" type="Button" parent="CenterContainer/CenterContainer/ButtonContainer" unique_id=1136623009]
+custom_minimum_size = Vector2(140, 840)
+layout_mode = 2
+theme = SubResource("Theme_feb5d")
+icon = ExtResource("2_fc0e3")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterContainer/CenterContainer" unique_id=1851732625]
+visible = false
+position = Vector2(504, 420)
+scale = Vector2(1.1468976, 1.0502653)
+texture = ExtResource("2_feb5d")
+
+[node name="Control" type="Control" parent="." unique_id=383172593]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 445.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=1055108255]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuButton" type="Button" parent="Control/HBoxContainer" unique_id=1911258827]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/MenuButton" unique_id=744967103]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -23.575
+offset_right = 23.575
+offset_bottom = 62.0
+grow_horizontal = 2
+texture = ExtResource("3_feb5d")
+expand_mode = 1
+
+[node name="AIPlay" type="Button" parent="Control/HBoxContainer" unique_id=113289815]
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 39
+text = "AI Play"
+
+[node name="PauseContainer" type="CenterContainer" parent="." unique_id=479861229]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="PauseContainer" unique_id=347276903]
+custom_minimum_size = Vector2(1280, 1280)
+layout_mode = 2
+color = Color(0, 0, 0, 0.8039216)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseContainer" unique_id=234418079]
+layout_mode = 2
+
+[node name="PauseTitle" type="Label" parent="PauseContainer/VBoxContainer" unique_id=1785098582]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.8235294, 0.8235294, 0.8235294, 0.4627451)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("5_7jktm")
+theme_override_font_sizes/font_size = 140
+text = "PAUSED"
+
+[node name="ContinueButton" type="Button" parent="PauseContainer/VBoxContainer" unique_id=1249892100]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_7jktm")
+theme_override_font_sizes/font_size = 78
+text = "Continue"
+
+[node name="RestartButton" type="Button" parent="PauseContainer/VBoxContainer" unique_id=2019007257]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_7jktm")
+theme_override_font_sizes/font_size = 78
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="PauseContainer/VBoxContainer" unique_id=812290630]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_7jktm")
+theme_override_font_sizes/font_size = 78
+text = "Quit to menu"
+
+[node name="ResultContainer" type="Control" parent="." unique_id=462230571]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 1280.0
+
+[node name="Background" type="ColorRect" parent="ResultContainer" unique_id=1460217219]
+custom_minimum_size = Vector2(1280, 1280)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 1280.0
+color = Color(0, 0, 0, 0.5686275)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ResultContainer" unique_id=33892950]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -206.5
+offset_right = 206.5
+offset_bottom = 226.0
+grow_horizontal = 2
+size_flags_vertical = 0
+
+[node name="ResultLabel" type="Label" parent="ResultContainer/VBoxContainer" unique_id=1259989109]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.8235294, 0.8235294, 0.8235294, 0.4627451)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("5_7jktm")
+theme_override_font_sizes/font_size = 120
+text = "Draw!"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ResultContainer/VBoxContainer" unique_id=1394074738]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="ResultContainer/VBoxContainer/HBoxContainer" unique_id=1286630288]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_7jktm")
+theme_override_font_sizes/font_size = 64
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="ResultContainer/VBoxContainer/HBoxContainer" unique_id=1552215453]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_7jktm")
+theme_override_font_sizes/font_size = 64
+text = "Quit to menu"
+
+[connection signal="hide_preview" from="." to="." method="_hide_preview"]
+[connection signal="pressed" from="Control/HBoxContainer/AIPlay" to="." method="_on_ai_play_button_pressed"]

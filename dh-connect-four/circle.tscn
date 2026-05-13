@@ -1,20 +1,8 @@
 [gd_scene format=3 uid="uid://bumyw74ljmrbp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8m7p"]
-size = Vector2(129.09633, 130)
+[ext_resource type="Script" uid="uid://b5q68k37shs0o" path="res://circle.gd" id="1_ot13w"]
 
-[node name="Circle" type="Area2D" unique_id=1532417493]
-
-[node name="Color" type="ColorRect" parent="." unique_id=596473811]
-custom_minimum_size = Vector2(130, 130)
-offset_right = 40.0
-offset_bottom = 39.999992
-mouse_filter = 1
-color = Color(0, 0, 0, 1)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350518936]
-position = Vector2(65, 65)
-scale = Vector2(1.007, 1)
-shape = SubResource("RectangleShape2D_j8m7p")
-metadata/_edit_group_ = true
+[node name="Circle" type="Node2D" unique_id=252969679]
+position = Vector2(54, 54)
+scale = Vector2(108, 108)
+script = ExtResource("1_ot13w")
