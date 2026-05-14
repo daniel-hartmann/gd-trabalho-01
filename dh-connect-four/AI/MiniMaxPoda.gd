@@ -5,7 +5,7 @@ const GAME_GRID = preload("res://AI/GameGrid.gd")
 const PLAY = preload("res://AI/Play.gd")
 
 const INFINITO: int = 99999
-var PROF_MAX: int = 2
+var PROF_MAX: int = 5
 
 func melhor_jogada(tabuleiro: GameGrid, jogador: String, dificuldade: String) -> Play:
 	var jogada: Play = minimax(tabuleiro, jogador, 1, -INFINITO, INFINITO, PROF_MAX, dificuldade)

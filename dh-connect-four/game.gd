@@ -9,6 +9,7 @@ extends Node2D
 
 var game_type: String
 var player1_is_red: bool
+var player1: String
 var difficulty = GAME_GRID.DIFFICULTY_HARD
 var game_finished: bool = false
 
@@ -45,6 +46,11 @@ func _ready() -> void:
 
 	menu_button.connect("pressed", toggle_pause_menu.bind())
 	
+	if player1_is_red:
+		player1 = GAME_GRID.RED
+	else:
+		player1 = GAME_GRID.YELLOW
+	
 	# Schedule AI move
 	if game_type == "pvc" and not player1_is_red and game.current_player() == GAME_GRID.RED:
 		$Timer.start()
@@ -76,17 +82,18 @@ func _get_current_row(column_index) -> int:
 	# TODO: depois eu vejo
 	return -1
 
+
 func _hide_preview():
 	for circle in preview_circles:
 		if circle:
 			circle.queue_free()
 	preview_circles = []
-		
+
 
 func play_preview_action(column_index, button) -> void:
-	if game_type == "ai_demo":
+	if game_type == "ai_demo" or game_type == "pvc" and player1 != game.current_player():
 		return
-	
+
 	hide_preview.emit()
 	
 	var current_row = _get_current_row(column_index)
@@ -112,7 +119,9 @@ func play_preview_action(column_index, button) -> void:
 func play_action(column_index, button) -> void:
 	hide_preview.emit()
 	var currentRow = _get_current_row(column_index)
-	if _make_play(Vector2(currentRow, column_index)):
+	if _make_play(Vector2(currentRow, column_index)) and game_type == "pvc":
+		# Schedule AI play
+		disable_buttons()
 		$Timer.start()
 	
 	
@@ -213,3 +222,4 @@ func toggle_pause_menu():
 func _on_timer_timeout() -> void:
 	print("_on_timer_timeout")
 	ai_move()
+	enable_buttons()
