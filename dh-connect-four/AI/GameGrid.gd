@@ -62,7 +62,7 @@ func evaluate(dificuldade: String) -> float:
 				contador -= 1
 				eval -= self.pesos[y][x]
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -82,7 +82,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -101,7 +101,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -121,7 +121,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -140,7 +140,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -159,7 +159,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -178,7 +178,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -198,7 +198,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -217,7 +217,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -236,7 +236,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -255,7 +255,7 @@ func evaluate(dificuldade: String) -> float:
 					contador = 0
 				contador -= 1
 			else:
-				eval += avaliar_match(contador, dificuldade)
+				eval += evaluate_match(contador, dificuldade)
 				contador = 0
 			if contador == 4:
 				eval += 1000
@@ -264,7 +264,7 @@ func evaluate(dificuldade: String) -> float:
 	
 	return eval
 
-func avaliar_match(n: int, dificuldade: String) -> float:
+func evaluate_match(n: int, dificuldade: String) -> float:
 	if dificuldade == "DIFICIL":
 		match n:
 			2: return 10

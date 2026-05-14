@@ -7,8 +7,10 @@ extends Node2D
 @onready var play_button = $Control/HBoxContainer/AIPlay
 @onready var menu_button = $Control/HBoxContainer/MenuButton
 
-@export var game_type: String
-@export var player1_is_red: bool
+var game_type: String
+var player1_is_red: bool
+var difficulty = GAME_GRID.DIFFICULTY_HARD
+var game_finished: bool = false
 
 signal hide_preview
 
@@ -26,7 +28,6 @@ var game: GameGrid = GameGrid.new()
 
 var preview_circles: Array = []
 
-var difficulty = GAME_GRID.DIFFICULTY_HARD
 
 func _input(event: InputEvent) -> void:
 	# Setup pause
@@ -43,6 +44,17 @@ func _ready() -> void:
 	print("player1_is_red: ", player1_is_red)
 
 	menu_button.connect("pressed", toggle_pause_menu.bind())
+	
+	# Schedule AI move
+	if game_type == "pvc" and not player1_is_red and game.current_player() == GAME_GRID.RED:
+		$Timer.start()
+
+
+func _process(delta: float) -> void:
+	if game_type == "ai_demo" and not game_finished:
+		disable_buttons()
+		ai_move()
+		OS.delay_msec(100)
 
 
 func _setup_column_buttons():
@@ -72,6 +84,9 @@ func _hide_preview():
 		
 
 func play_preview_action(column_index, button) -> void:
+	if game_type == "ai_demo":
+		return
+	
 	hide_preview.emit()
 	
 	var current_row = _get_current_row(column_index)
@@ -97,10 +112,11 @@ func play_preview_action(column_index, button) -> void:
 func play_action(column_index, button) -> void:
 	hide_preview.emit()
 	var currentRow = _get_current_row(column_index)
-	_make_play(Vector2(currentRow, column_index))
+	if _make_play(Vector2(currentRow, column_index)):
+		$Timer.start()
 	
 	
-func _make_play(movement: Vector2) -> void:
+func _make_play(movement: Vector2) -> bool:
 	if game.jogada(movement):
 		var evaluation: float = game.evaluate(difficulty)
 
@@ -126,16 +142,20 @@ func _make_play(movement: Vector2) -> void:
 		column.add_child(circle)
 		
 		game.switch_player()
+		
+		return true
+	return false
 
 
 func game_over(result) -> void:
 	disable_buttons()
 	$ResultContainer.visible = true
 	$ResultContainer/VBoxContainer/ResultLabel.text = result
+	game_finished = true
 
 
 func ai_move() -> void:
-	disable_buttons()
+	#disable_buttons()
 	var player: String = game.current_player()
 	var current_play: Play = mmp.melhor_jogada(game.duplicate(true), player, difficulty)
 
@@ -144,7 +164,7 @@ func ai_move() -> void:
 
 	_make_play(current_play.movimento)
 
-	enable_buttons()
+	#enable_buttons()
 		
 func disable_buttons() -> void:
 	for button in column_buttons:
@@ -155,6 +175,8 @@ func enable_buttons() -> void:
 		button.disabled = false
 
 func reset_game() -> void:
+	game_finished = false
+
 	# Empty game grid
 	game = GameGrid.new()
 	for button in column_buttons:
@@ -186,3 +208,8 @@ func quit_to_main_menu():
 
 func toggle_pause_menu():
 	$PauseContainer.visible = !$PauseContainer.visible
+
+
+func _on_timer_timeout() -> void:
+	print("_on_timer_timeout")
+	ai_move()

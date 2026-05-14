@@ -35,8 +35,10 @@ offset_right = 960.5
 offset_bottom = 185.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_x4i35")
-theme_override_font_sizes/font_size = 160
+theme_override_font_sizes/font_size = 100
 text = "Select Player"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=292996894]
 layout_mode = 1
@@ -93,7 +95,8 @@ stretch_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("1_x4i35")
+theme_override_font_sizes/font_size = 78
 text = " Start Game "
 autowrap_trim_flags = 0
 

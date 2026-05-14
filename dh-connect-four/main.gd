@@ -26,7 +26,7 @@ func _new_game(scene) -> void:
 	add_child(scene)
 
 func new_pvc_game():
-	_new_game(preload("res://select_color.tscn").instantiate())
+	_new_game(preload("res://select_difficulty.tscn").instantiate())
 
 func new_pvp_game():
 	var game = preload("res://game.tscn").instantiate()
@@ -36,4 +36,4 @@ func new_pvp_game():
 func new_ai_game():
 	var game = preload("res://game.tscn").instantiate()
 	game.game_type = "ai_demo"
-	_new_game(preload("res://game.tscn").instantiate())
+	_new_game(game)

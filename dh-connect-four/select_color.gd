@@ -5,6 +5,7 @@ extends Control
 
 var mouse_texture = preload("res://art/mouse.png")
 var player1_is_red: bool = true
+var difficulty: String
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_right"):
@@ -28,7 +29,10 @@ func start_game() -> void:
 	for child in get_parent().get_children():
 		child.queue_free()
 
+	print("difficulty: ", difficulty)
+
 	var game = preload("res://game.tscn").instantiate()
 	game.game_type = "pvc"
 	game.player1_is_red = player1_is_red
+	game.difficulty = difficulty
 	get_parent().add_child(game)

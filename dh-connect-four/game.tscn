@@ -213,5 +213,9 @@ theme_override_fonts/font = ExtResource("5_7jktm")
 theme_override_font_sizes/font_size = 64
 text = "Quit to menu"
 
+[node name="Timer" type="Timer" parent="." unique_id=1444172805]
+one_shot = true
+
 [connection signal="hide_preview" from="." to="." method="_hide_preview"]
 [connection signal="pressed" from="Control/HBoxContainer/AIPlay" to="." method="ai_move"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
