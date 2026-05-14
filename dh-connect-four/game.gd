@@ -7,6 +7,9 @@ extends Node2D
 @onready var play_button = $Control/HBoxContainer/AIPlay
 @onready var menu_button = $Control/HBoxContainer/MenuButton
 
+@export var game_type: String
+@export var player1_is_red: bool
+
 signal hide_preview
 
 const MAIN_MENU = preload("res://main_menu.tscn")
@@ -30,13 +33,17 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		toggle_pause_menu()
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	_config_pause_menu_buttons()
 	_config_result_menu_buttons()
 	_setup_column_buttons()
-	
+
+	print("game_type: ", game_type)
+	print("player1_is_red: ", player1_is_red)
+
 	menu_button.connect("pressed", toggle_pause_menu.bind())
+
 
 func _setup_column_buttons():
 	var column_index: int = 0
@@ -127,7 +134,7 @@ func game_over(result) -> void:
 	$ResultContainer/VBoxContainer/ResultLabel.text = result
 
 
-func _on_ai_play_button_pressed() -> void:
+func ai_move() -> void:
 	disable_buttons()
 	var player: String = game.current_player()
 	var current_play: Play = mm.melhor_jogada(game.duplicate(true), player, 1)
@@ -158,10 +165,10 @@ func reset_game() -> void:
 	for button in column_buttons:
 		for child in button.get_children():
 			child.queue_free()
-	
+
 	# Enable buttons and clean label
 	enable_buttons()
-	
+
 	# Close pause and result menu in case it's visible
 	$PauseContainer.visible = false
 	$ResultContainer.visible = false

@@ -221,4 +221,4 @@ theme_override_font_sizes/font_size = 64
 text = "Quit to menu"
 
 [connection signal="hide_preview" from="." to="." method="_hide_preview"]
-[connection signal="pressed" from="Control/HBoxContainer/AIPlay" to="." method="_on_ai_play_button_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/AIPlay" to="." method="ai_move"]

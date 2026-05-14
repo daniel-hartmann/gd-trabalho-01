@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://bq6fstj2xfvgo"]
+
+[ext_resource type="Script" uid="uid://culdb6ax04fsx" path="res://select_color.gd" id="1_kjfj5"]
+[ext_resource type="FontFile" uid="uid://cgd3m3rqin1to" path="res://fonts/PathwayGothicOne-Regular.ttf" id="1_x4i35"]
+[ext_resource type="Texture2D" uid="uid://vg7oexx1fe8b" path="res://art/red-circle.png" id="3_02xq8"]
+[ext_resource type="Texture2D" uid="uid://doi36hquhxhc5" path="res://art/mouse.png" id="4_02xq8"]
+[ext_resource type="Texture2D" uid="uid://dynmum1xy4sya" path="res://art/yellow-circle.png" id="4_kjfj5"]
+
+[node name="SelectColor" type="Control" unique_id=1417782483]
+custom_minimum_size = Vector2(1280, 1280)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0016674)
+script = ExtResource("1_kjfj5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1494811873]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02745098, 0.05490196, 0.7058824, 1)
+
+[node name="MainMessage" type="Label" parent="." unique_id=92936838]
+layout_mode = 0
+offset_left = 319.5
+offset_right = 960.5
+offset_bottom = 185.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_x4i35")
+theme_override_font_sizes/font_size = 160
+text = "Select Player"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=292996894]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -243.0
+offset_right = 243.0
+offset_bottom = 597.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1041245655]
+layout_mode = 2
+theme_override_constants/margin_left = 140
+theme_override_constants/margin_top = 340
+theme_override_constants/margin_right = 140
+theme_override_constants/margin_bottom = 100
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/MarginContainer" unique_id=1089254517]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+columns = 3
+
+[node name="Red" type="TextureButton" parent="VBoxContainer/MarginContainer/GridContainer" unique_id=1519904943]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+texture_normal = ExtResource("3_02xq8")
+stretch_mode = 3
+
+[node name="VSLabel" type="Label" parent="VBoxContainer/MarginContainer/GridContainer" unique_id=643128094]
+layout_mode = 2
+text = "  VS  "
+
+[node name="Yellow" type="TextureButton" parent="VBoxContainer/MarginContainer/GridContainer" unique_id=108780006]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+texture_normal = ExtResource("4_kjfj5")
+stretch_mode = 3
+
+[node name="Player1Red" type="TextureRect" parent="VBoxContainer/MarginContainer/GridContainer" unique_id=749820129]
+layout_mode = 2
+texture = ExtResource("4_02xq8")
+stretch_mode = 3
+
+[node name="SwitchLabel" type="Label" parent="VBoxContainer/MarginContainer/GridContainer" unique_id=1983355127]
+layout_mode = 2
+
+[node name="Player1Yellow" type="TextureRect" parent="VBoxContainer/MarginContainer/GridContainer" unique_id=237964187]
+layout_mode = 2
+stretch_mode = 3
+
+[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1296424486]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = " Start Game "
+autowrap_trim_flags = 0
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/GridContainer/Red" to="." method="select_red"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/GridContainer/Yellow" to="." method="select_yellow"]
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="start_game"]

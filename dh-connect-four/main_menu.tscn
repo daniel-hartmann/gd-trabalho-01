@@ -41,11 +41,23 @@ text = "Connect 4"
 [node name="Actions" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1241136055]
 layout_mode = 2
 
-[node name="NewGame" type="Button" parent="CenterContainer/VBoxContainer/Actions" unique_id=1642916388]
+[node name="PvCGame" type="Button" parent="CenterContainer/VBoxContainer/Actions" unique_id=1642916388]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_06t4h")
 theme_override_font_sizes/font_size = 78
-text = "New Game"
+text = "Single Player"
+
+[node name="PvPGame" type="Button" parent="CenterContainer/VBoxContainer/Actions" unique_id=721122736]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 78
+text = "Two Players"
+
+[node name="AIGame" type="Button" parent="CenterContainer/VBoxContainer/Actions" unique_id=1405418168]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_06t4h")
+theme_override_font_sizes/font_size = 78
+text = "AI Demo"
 
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer/Actions" unique_id=561307958]
 layout_mode = 2
