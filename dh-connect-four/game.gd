@@ -14,12 +14,10 @@ signal hide_preview
 
 const MAIN_MENU = preload("res://main_menu.tscn")
 
-const MINIMAX_PODA = preload("res://minimax_poda.gd")
-const MINIMAX = preload("res://minimax.gd")
+const MINIMAX_PODA = preload("res://AI/MiniMaxPoda.gd")
 var mmp: MinimaxPoda = MinimaxPoda.new()
-var mm: Minimax = Minimax.new()
 
-const GAME_GRID = preload("res://game_grid.gd")
+const GAME_GRID = preload("res://AI/GameGrid.gd")
 const CIRCLE = preload("res://circle.tscn")
 const CIRCLE_PADDING = 20
 const CIRCLE_WIDTH = 100 + CIRCLE_PADDING*2
@@ -27,6 +25,8 @@ const CIRCLE_WIDTH = 100 + CIRCLE_PADDING*2
 var game: GameGrid = GameGrid.new()
 
 var preview_circles: Array = []
+
+var difficulty = GAME_GRID.DIFFICULTY_HARD
 
 func _input(event: InputEvent) -> void:
 	# Setup pause
@@ -102,9 +102,9 @@ func play_action(column_index, button) -> void:
 	
 func _make_play(movement: Vector2) -> void:
 	if game.jogada(movement):
-		var evaluation: float = game.evaluate()
+		var evaluation: float = game.evaluate(difficulty)
 
-		if abs(evaluation) >= 100000:
+		if abs(evaluation) >= 900:
 			var result = ""
 			if game.current_player() == GameGrid.RED:
 				result = "Red won!"
@@ -113,7 +113,7 @@ func _make_play(movement: Vector2) -> void:
 
 			game_over(result)
 			
-		elif game.empate():
+		elif game.draw():
 			game_over("Draw!")
 
 		# Interface
@@ -137,8 +137,7 @@ func game_over(result) -> void:
 func ai_move() -> void:
 	disable_buttons()
 	var player: String = game.current_player()
-	var current_play: Play = mm.melhor_jogada(game.duplicate(true), player, 1)
-	#var current_play: Play = mmp.melhor_jogada(game.duplicate(true), player)
+	var current_play: Play = mmp.melhor_jogada(game.duplicate(true), player, difficulty)
 
 	print("AI movement: ", current_play.movimento)
 	print("AI evaluation: ", current_play.avaliacao)

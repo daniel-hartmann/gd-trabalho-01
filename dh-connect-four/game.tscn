@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c1qctpxkwse1o" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://6f7nixx57kde" path="res://art/column.png" id="2_fc0e3"]
-[ext_resource type="Texture2D" uid="uid://dqw804ntt5vlm" path="res://art/board.png" id="2_feb5d"]
 [ext_resource type="Texture2D" uid="uid://b1j25a021i2mf" path="res://art/menu-icon.png" id="3_feb5d"]
 [ext_resource type="FontFile" uid="uid://cgd3m3rqin1to" path="res://fonts/PathwayGothicOne-Regular.ttf" id="5_7jktm"]
 
@@ -84,12 +83,6 @@ layout_mode = 2
 theme = SubResource("Theme_feb5d")
 icon = ExtResource("2_fc0e3")
 flat = true
-
-[node name="Sprite2D" type="Sprite2D" parent="CenterContainer/CenterContainer" unique_id=1851732625]
-visible = false
-position = Vector2(504, 420)
-scale = Vector2(1.1468976, 1.0502653)
-texture = ExtResource("2_feb5d")
 
 [node name="Control" type="Control" parent="." unique_id=383172593]
 layout_mode = 3
