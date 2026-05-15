@@ -1,8 +1,8 @@
 extends Resource
 class_name GameGrid
 
-const RED = "#EF476F"
-const YELLOW = "#F6D776"
+const RED = "#7A1E2C"
+const YELLOW = "#9C7A1C"
 const EMPTY = ""
 
 const DIFFICULTY_EASY = "EASY"

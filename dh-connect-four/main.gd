@@ -1,6 +1,8 @@
 extends Node
+@export var bgm: AudioStream
 
 func _ready() -> void:
+	AudioManager.play_background_music(bgm)
 	load_menu()
 
 func quit():

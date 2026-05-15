@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://blqpdglron6af"]
 
 [ext_resource type="Script" uid="uid://dbmlmelj7x37h" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="AudioStream" uid="uid://urssqhlmybtl" path="res://audio/loop1.wav" id="2_0xm2m"]
 
 [node name="Main" type="Node" unique_id=485200629]
 script = ExtResource("1_ig7tw")
+bgm = ExtResource("2_0xm2m")

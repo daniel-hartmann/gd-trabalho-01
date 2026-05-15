@@ -1,28 +1,35 @@
 [gd_scene format=3 uid="uid://dn557ttm3o3lc"]
 
 [ext_resource type="Script" uid="uid://c1qctpxkwse1o" path="res://game.gd" id="1_e2o6t"]
+[ext_resource type="AudioStream" uid="uid://urssqhlmybtl" path="res://audio/loop1.wav" id="2_7jktm"]
 [ext_resource type="Texture2D" uid="uid://6f7nixx57kde" path="res://art/column.png" id="2_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://b1j25a021i2mf" path="res://art/menu-icon.png" id="3_feb5d"]
 [ext_resource type="FontFile" uid="uid://cgd3m3rqin1to" path="res://fonts/PathwayGothicOne-Regular.ttf" id="5_7jktm"]
+[ext_resource type="AudioStream" uid="uid://26yuk8iyt6gh" path="res://audio/fx6.wav" id="6_ryrav"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryrav"]
+shadow_color = Color(0.16470589, 0.18431373, 0.27058825, 1)
 
 [sub_resource type="Theme" id="Theme_feb5d"]
 
 [node name="Game" type="Node2D" unique_id=1131128064]
 script = ExtResource("1_e2o6t")
+bgm = ExtResource("2_7jktm")
 
 [node name="Background" type="ColorRect" parent="." unique_id=147808367]
 custom_minimum_size = Vector2(1280, 1280)
 offset_right = 1280.0
 offset_bottom = 1024.0
-color = Color(0.9295974, 0.95279354, 0.90761125, 1)
+color = Color(0.043137256, 0.043137256, 0.05882353, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=523542618]
 custom_minimum_size = Vector2(1280, 1280)
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CenterContainer" type="CenterContainer" parent="CenterContainer" unique_id=405003996]
+[node name="CenterContainer" type="PanelContainer" parent="CenterContainer" unique_id=1818964879]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ryrav")
 
 [node name="ButtonContainer" type="GridContainer" parent="CenterContainer/CenterContainer" unique_id=1423239218]
 layout_mode = 2
@@ -215,6 +222,11 @@ text = "Quit to menu"
 
 [node name="Timer" type="Timer" parent="." unique_id=1444172805]
 one_shot = true
+
+[node name="FX1" type="AudioStreamPlayer" parent="." unique_id=1145011419]
+stream = ExtResource("6_ryrav")
+pitch_scale = 2.2
+bus = &"FX"
 
 [connection signal="hide_preview" from="." to="." method="_hide_preview"]
 [connection signal="pressed" from="Control/HBoxContainer/AIPlay" to="." method="ai_move"]

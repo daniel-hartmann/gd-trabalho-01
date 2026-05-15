@@ -7,6 +7,9 @@ extends Node2D
 @onready var play_button = $Control/HBoxContainer/AIPlay
 @onready var menu_button = $Control/HBoxContainer/MenuButton
 
+@export var bgm: AudioStream
+@onready var fx1 = $FX1
+
 var game_type: String
 var player1_is_red: bool
 var player1: String
@@ -37,6 +40,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
+	AudioManager.play_background_music(bgm)
+	
 	_config_pause_menu_buttons()
 	_config_result_menu_buttons()
 	_setup_column_buttons()
@@ -91,10 +96,10 @@ func _hide_preview():
 
 
 func play_preview_action(column_index, button) -> void:
+	hide_preview.emit()
+
 	if game_type == "ai_demo" or game_type == "pvc" and player1 != game.current_player():
 		return
-
-	hide_preview.emit()
 	
 	var current_row = _get_current_row(column_index)
 
@@ -127,6 +132,12 @@ func play_action(column_index, button) -> void:
 	
 func _make_play(movement: Vector2) -> bool:
 	if game.jogada(movement):
+		
+		fx1.pitch_scale = randf_range(0.8, 1.0)
+		fx1.play()
+		#AudioManager.play_sound_effect(fx1)
+		
+		
 		var evaluation: float = game.evaluate(difficulty)
 
 		if abs(evaluation) >= 900:

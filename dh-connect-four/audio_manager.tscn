@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dpfobi5gafmyb"]
+
+[ext_resource type="Script" uid="uid://bxqxdgns11fhp" path="res://audio_manager.gd" id="1_jisk1"]
+
+[node name="AudioManager" type="Node" unique_id=1570540362]
+script = ExtResource("1_jisk1")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1961727726]
+autoplay = true
+bus = &"BGM"
