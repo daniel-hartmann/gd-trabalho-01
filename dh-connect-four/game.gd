@@ -58,6 +58,7 @@ func _ready() -> void:
 	
 	# Schedule AI move
 	if game_type == "pvc" and not player1_is_red and game.current_player() == GAME_GRID.RED:
+		disable_buttons()
 		$Timer.start()
 
 
@@ -65,7 +66,6 @@ func _process(delta: float) -> void:
 	if game_type == "ai_demo" and not game_finished:
 		disable_buttons()
 		ai_move()
-		OS.delay_msec(100)
 
 
 func _setup_column_buttons():
@@ -128,6 +128,8 @@ func play_action(column_index, button) -> void:
 		# Schedule AI play
 		disable_buttons()
 		$Timer.start()
+	else:
+		play_preview_action(column_index, button)
 	
 	
 func _make_play(movement: Vector2) -> bool:
@@ -135,9 +137,7 @@ func _make_play(movement: Vector2) -> bool:
 		
 		fx1.pitch_scale = randf_range(0.8, 1.0)
 		fx1.play()
-		#AudioManager.play_sound_effect(fx1)
-		
-		
+
 		var evaluation: float = game.evaluate(difficulty)
 
 		if abs(evaluation) >= 900:
@@ -177,7 +177,14 @@ func game_over(result) -> void:
 func ai_move() -> void:
 	#disable_buttons()
 	var player: String = game.current_player()
-	var current_play: Play = mmp.melhor_jogada(game.duplicate(true), player, difficulty)
+	var current_play: Play
+	
+	if difficulty == GAME_GRID.DIFFICULTY_EASY:
+		var possible_movements = game.jogadas_possiveis()
+		var evaluation = game.evaluate(difficulty)
+		current_play = Play.new(possible_movements[randi_range(0, len(possible_movements)-1)], evaluation)
+	else:
+		current_play = mmp.melhor_jogada(game.duplicate(true), player, difficulty)
 
 	print("AI movement: ", current_play.movimento)
 	print("AI evaluation: ", current_play.avaliacao)
@@ -213,6 +220,11 @@ func reset_game() -> void:
 	# Close pause and result menu in case it's visible
 	$PauseContainer.visible = false
 	$ResultContainer.visible = false
+	
+		# Schedule AI move
+	if game_type == "pvc" and not player1_is_red and game.current_player() == GAME_GRID.RED:
+		disable_buttons()
+		$Timer.start()
 
 func _config_result_menu_buttons():
 	$ResultContainer/VBoxContainer/HBoxContainer/RestartButton.connect("pressed", reset_game.bind())
@@ -229,8 +241,7 @@ func quit_to_main_menu():
 func toggle_pause_menu():
 	$PauseContainer.visible = !$PauseContainer.visible
 
-
 func _on_timer_timeout() -> void:
-	print("_on_timer_timeout")
-	ai_move()
-	enable_buttons()
+	if not game_finished:
+		ai_move()
+		enable_buttons()

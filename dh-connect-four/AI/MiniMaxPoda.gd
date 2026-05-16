@@ -6,9 +6,16 @@ const PLAY = preload("res://AI/Play.gd")
 
 const INFINITO: int = 99999
 var PROF_MAX: int = 5
+var PROFUNDIDADES = {
+	GAME_GRID.DIFFICULTY_EASY: 1,
+	GAME_GRID.DIFFICULTY_MEDIUM: 4,
+	GAME_GRID.DIFFICULTY_HARD: 6,
+}
 
 func melhor_jogada(tabuleiro: GameGrid, jogador: String, dificuldade: String) -> Play:
-	var jogada: Play = minimax(tabuleiro, jogador, 1, -INFINITO, INFINITO, PROF_MAX, dificuldade)
+	var profundidade_maxima = PROFUNDIDADES.get(dificuldade)
+	print("===== profundidade_maxima: ", profundidade_maxima)
+	var jogada: Play = minimax(tabuleiro, jogador, 1, -INFINITO, INFINITO, profundidade_maxima, dificuldade)
 	#print("what", tabuleiro.evaluate(dificuldade))
 	return jogada
 
@@ -35,7 +42,7 @@ func minimax(tabuleiro: GameGrid, jogador: String, profundidade: int, alfa: int,
 					
 		#print("Profundidade: ", profundidade, " tabuleiro: ", novo_tabuleiro.tabuleiro, " Jogador: ", jogador)
 		var novo_jog: String = tabuleiro.RED if jogador == tabuleiro.YELLOW else tabuleiro.YELLOW
-		var jogada: Play = minimax(novo_tabuleiro, novo_jog, profundidade + 1, alfa, beta, PROF_MAX, dificuldade)
+		var jogada: Play = minimax(novo_tabuleiro, novo_jog, profundidade + 1, alfa, beta, profundidadeMax, dificuldade)
 		jogada.movimento = movimento
 		#jogada.avaliacao = novo_tabuleiro.evaluate(dificuldade)
 		

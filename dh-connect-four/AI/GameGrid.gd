@@ -12,7 +12,7 @@ const DIFFICULTY_HARD = "HARD"
 @export var grid: Array
 @export var player: String
 @export var _next_player: String
-@export var pesos: Array
+@export var pesos: Dictionary
 
 func _init():
 	self.grid = [
@@ -23,14 +23,32 @@ func _init():
 		[EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
 		[EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
 	]
-	self.pesos = [
-		[2, 5, 8, 12, 8, 5, 2],
-		[5, 8, 10, 12, 10, 8, 5],
-		[5, 8, 12, 15, 12, 8, 5],
-		[5, 8, 12, 15, 12, 8, 5],
-		[5, 8, 10, 12, 10, 8, 5],
-		[2, 5, 8, 12, 8, 5, 2],
-	]
+	self.pesos = {
+		DIFFICULTY_EASY: [
+			[2, 5, 8, 8, 8, 5, 2],
+			[5, 8, 8, 8, 8, 8, 5],
+			[5, 8, 8, 8, 8, 8, 5],
+			[5, 8, 8, 8, 8, 8, 5],
+			[5, 8, 8, 8, 8, 8, 5],
+			[2, 5, 8, 8, 8, 5, 2],
+		],
+		DIFFICULTY_MEDIUM: [
+			[2, 5, 8, 12, 8, 5, 2],
+			[5, 8, 10, 12, 10, 8, 5],
+			[5, 8, 12, 15, 12, 8, 5],
+			[5, 8, 12, 15, 12, 8, 5],
+			[5, 8, 10, 12, 10, 8, 5],
+			[2, 5, 8, 12, 8, 5, 2],
+		],
+		DIFFICULTY_HARD: [
+			[2, 5, 8, 12, 8, 5, 2],
+			[5, 8, 10, 12, 10, 8, 5],
+			[5, 8, 12, 15, 12, 8, 5],
+			[5, 8, 12, 15, 12, 8, 5],
+			[5, 8, 10, 12, 10, 8, 5],
+			[2, 5, 8, 12, 8, 5, 2],
+		],
+	}
 	self.player = RED
 	self._next_player = YELLOW
 
@@ -55,12 +73,12 @@ func evaluate(dificuldade: String) -> float:
 				if contador < 0:
 					contador = 0
 				contador += 1
-				eval += self.pesos[y][x]
+				eval += self.pesos[dificuldade][y][x]
 			elif self.grid[y][x] == self.next_player():
 				if contador > 0:
 					contador = 0
 				contador -= 1
-				eval -= self.pesos[y][x]
+				eval -= self.pesos[dificuldade][y][x]
 			else:
 				eval += evaluate_match(contador, dificuldade)
 				contador = 0
@@ -265,7 +283,7 @@ func evaluate(dificuldade: String) -> float:
 	return eval
 
 func evaluate_match(n: int, dificuldade: String) -> float:
-	if dificuldade == "DIFICIL":
+	if dificuldade == DIFFICULTY_HARD:
 		match n:
 			2: return 10
 			3: return 50
@@ -274,7 +292,7 @@ func evaluate_match(n: int, dificuldade: String) -> float:
 			-3: return -80
 			-4: return -1000
 			_: return 0
-	elif dificuldade == "MEDIO":
+	elif dificuldade == DIFFICULTY_MEDIUM:
 		match n:
 			2: return 15
 			3: return 80
@@ -283,7 +301,7 @@ func evaluate_match(n: int, dificuldade: String) -> float:
 			-3: return -50
 			-4: return -1000
 			_: return 0
-	else:
+	else: # DIFFICULTY_EASY
 		match n:
 			2: return 10
 			3: return 50
